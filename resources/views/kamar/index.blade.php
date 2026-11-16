@@ -20,7 +20,7 @@
                         <label class="form-label">Tipe Kamar</label>
                         <select name="tipe_kamar_id" class="form-select" required>
                             <option value="">-- Pilih tipe --</option>
-                            @foreach ($tipeKamars as $tipe)
+                            @foreach ($tipeKamar as $tipe)
                                 <option value="{{ $tipe->id }}" {{ old('tipe_kamar_id') == $tipe->id ? 'selected' : '' }}>
                                     {{ $tipe->nama_tipe }}
                                 </option>
@@ -65,7 +65,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($kamars as $item)
+                    @forelse ($kamar as $item)
                         <tr>
                             <td>{{ $item->nomor_kamar }}</td>
                             <td>{{ $item->tipeKamar->nama_tipe }}</td>

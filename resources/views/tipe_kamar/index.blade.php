@@ -44,7 +44,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($tipeKamars as $item)
+                    @forelse ($tipeKamar as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->nama_tipe }}</td>

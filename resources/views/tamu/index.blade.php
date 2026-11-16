@@ -49,7 +49,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($tamus as $item)
+                    @forelse ($tamu as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->nama }}</td>

@@ -30,7 +30,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($reservasis as $item)
+                    @forelse ($reservasi as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->tamu->nama }}</td>

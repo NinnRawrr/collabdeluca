@@ -13,7 +13,7 @@ class TipeKamarController extends Controller
     public function index()
     {
         $tipeKamar = TipeKamar::all();
-        return view('tipe-kamar.index', compact('tipeKamar'));
+        return view('tipe_kamar.index', compact('tipeKamar'));
     }
 
     /**
@@ -27,19 +27,24 @@ class TipeKamarController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'harga' => 'required|numeric|min:0'
-        ]);
+public function store(Request $request)
+{
+    // Sesuaikan nama field validasi dengan yang ada di database & form HTML
+    $request->validate([
+        'nama_tipe'       => 'required|string|max:255',
+        'harga_per_malam' => 'required|integer',
+        'fasilitas'       => 'nullable|string',
+    ]);
 
-        TipeKamar::create($request->all());
+    // Simpan ke database
+    TipeKamar::create([
+        'nama_tipe'       => $request->nama_tipe,
+        'harga_per_malam' => $request->harga_per_malam,
+        'fasilitas'       => $request->fasilitas,
+    ]);
 
-        return redirect()->route('tipe-kamar.index')
-                         ->with('success', 'Tipe kamar berhasil dibuat.');
-    }
+    return redirect()->back()->with('success', 'Tipe kamar berhasil ditambahkan.');
+}
 
     /**
      * Display the specified resource.
