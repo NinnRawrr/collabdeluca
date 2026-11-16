@@ -1,16 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ReservasiController;
 use App\Http\Controllers\KamarController;
+use App\Http\Controllers\ReservasiController;
 use App\Http\Controllers\TamuController;
 use App\Http\Controllers\TipeKamarController;
+use Illuminate\Support\Facades\Route;
 
+// Halaman utama -> daftar reservasi
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('reservasi.index');
 });
 
-Route::resource('reservasi', ReservasiController::class);
-Route::resource('kamar', KamarController::class);
-Route::resource('tamu', TamuController::class);
-Route::resource('tipe-kamar', TipeKamarController::class);
+// Tiap baris di bawah otomatis membuat alamat + nama route yang dipakai di view
+Route::resource('tipe-kamar', TipeKamarController::class)->only(['index', 'store', 'destroy']);
+Route::resource('kamar',      KamarController::class)->only(['index', 'store', 'update', 'destroy']);
+Route::resource('tamu',       TamuController::class)->only(['index', 'store', 'destroy']);
+Route::resource('reservasi',  ReservasiController::class)->only(['index', 'create', 'store', 'update', 'destroy']);
