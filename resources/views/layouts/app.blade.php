@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,32 +9,37 @@
     {{-- Bootstrap 5 (diambil dari internet lewat CDN, tidak perlu install apa-apa) --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-light">
 
     {{-- MENU ATAS --}}
     <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
         <div class="container">
-<<<<<<< HEAD
+
             <a class="navbar-brand" href="{{ route('reservasi.index') }}">🏨 Hotel Kita</a>
-=======
+
             <a class="navbar-brand" href="{{ route('dashboard') }}">🏨 Hotel Kita</a>
->>>>>>> 84939fed8a05d3cad6fbd204036119ea83597e9b
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuUtama">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="menuUtama">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('tipe-kamar.*') ? 'active' : '' }}" href="{{ route('tipe-kamar.index') }}">Tipe Kamar</a>
+                        <a class="nav-link {{ request()->routeIs('tipe-kamar.*') ? 'active' : '' }}"
+                            href="{{ route('tipe-kamar.index') }}">Tipe Kamar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('kamar.*') ? 'active' : '' }}" href="{{ route('kamar.index') }}">Kamar</a>
+                        <a class="nav-link {{ request()->routeIs('kamar.*') ? 'active' : '' }}"
+                            href="{{ route('kamar.index') }}">Kamar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('tamu.*') ? 'active' : '' }}" href="{{ route('tamu.index') }}">Tamu</a>
+                        <a class="nav-link {{ request()->routeIs('tamu.*') ? 'active' : '' }}"
+                            href="{{ route('tamu.index') }}">Tamu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('reservasi.*') ? 'active' : '' }}" href="{{ route('reservasi.index') }}">Reservasi</a>
+                        <a class="nav-link {{ request()->routeIs('reservasi.*') ? 'active' : '' }}"
+                            href="{{ route('reservasi.index') }}">Reservasi</a>
                     </li>
                 </ul>
                 <a class="btn btn-light btn-sm" href="{{ route('reservasi.create') }}">+ Reservasi Baru</a>
@@ -66,4 +72,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
