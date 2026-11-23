@@ -14,11 +14,23 @@
                         <label class="form-label">Tamu</label>
                         <select name="tamu_id" class="form-select" required>
                             <option value="">-- Pilih tamu --</option>
+<<<<<<< HEAD
                             @foreach ($tamus as $tamu)
                                 <option value="{{ $tamu->id }}" {{ old('tamu_id') == $tamu->id ? 'selected' : '' }}>
                                     {{ $tamu->nama }}
                                 </option>
                             @endforeach
+=======
+
+                            @foreach ($tamus as $tamu)
+
+                                @foreach ($tamu as $tamu)
+
+                                    <option value="{{ $tamu->id }}" {{ old('tamu_id') == $tamu->id ? 'selected' : '' }}>
+                                        {{ $tamu->nama }}
+                                    </option>
+                                @endforeach
+>>>>>>> 37c5c731a773671ffbbd6fd34fb9f9c6b8e9c8cc
                         </select>
                     </div>
 
@@ -27,6 +39,7 @@
                         {{-- $kamars sudah difilter di controller: hanya kamar berstatus "tersedia" --}}
                         <select name="kamar_id" id="kamar" class="form-select" required>
                             <option value="">-- Pilih kamar --</option>
+<<<<<<< HEAD
                             @foreach ($kamars as $kamar)
                                 <option value="{{ $kamar->id }}" data-harga="{{ $kamar->tipeKamar->harga_per_malam }}"
                                     {{ old('kamar_id') == $kamar->id ? 'selected' : '' }}>
@@ -34,17 +47,33 @@
                                     (Rp {{ number_format($kamar->tipeKamar->harga_per_malam, 0, ',', '.') }}/malam)
                                 </option>
                             @endforeach
+=======
+
+                            @foreach ($kamars as $kamar)
+
+                                @foreach ($kamar as $kamar)
+
+                                    <option value="{{ $kamar->id }}"
+                                        data-harga="{{ $kamar->tipeKamar->harga_per_malam }}"
+                                        {{ old('kamar_id') == $kamar->id ? 'selected' : '' }}>
+                                        {{ $kamar->nomor_kamar }} - {{ $kamar->tipeKamar->nama_tipe }}
+                                        (Rp {{ number_format($kamar->tipeKamar->harga_per_malam, 0, ',', '.') }}/malam)
+                                    </option>
+                                @endforeach
+>>>>>>> 37c5c731a773671ffbbd6fd34fb9f9c6b8e9c8cc
                         </select>
                         <div class="form-text">Hanya menampilkan kamar dengan status <b>tersedia</b>.</div>
                     </div>
 
                     <div class="col-md-6">
                         <label class="form-label">Tanggal Check-in</label>
-                        <input type="date" name="tanggal_checkin" id="checkin" class="form-control" value="{{ old('tanggal_checkin') }}" required>
+                        <input type="date" name="tanggal_checkin" id="checkin" class="form-control"
+                            value="{{ old('tanggal_checkin') }}" required>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Tanggal Check-out</label>
-                        <input type="date" name="tanggal_checkout" id="checkout" class="form-control" value="{{ old('tanggal_checkout') }}" required>
+                        <input type="date" name="tanggal_checkout" id="checkout" class="form-control"
+                            value="{{ old('tanggal_checkout') }}" required>
                     </div>
 
                    <div class="col-md-6">
@@ -71,6 +100,7 @@
     </div>
 
     {{-- Script kecil untuk menghitung total bayar = jumlah malam x harga kamar --}}
+<<<<<<< HEAD
 <script>
     function hitungTotal() {
         var kamar    = document.getElementById('kamar').selectedOptions[0];
@@ -91,5 +121,21 @@
     // Hitung otomatis saat halaman dibuka / setelah reload validasi
     hitungTotal();
 </script>
+=======
+    <script>
+        function hitungTotal() {
+            var kamar = document.getElementById('kamar').selectedOptions[0];
+            var harga = kamar ? kamar.dataset.harga : 0;
+            var checkin = new Date(document.getElementById('checkin').value);
+            var checkout = new Date(document.getElementById('checkout').value);
+            var malam = (checkout - checkin) / 86400000;
+            var total = (harga && malam > 0) ? harga * malam : 0;
+            document.getElementById('total').value = 'Rp ' + total.toLocaleString('id-ID');
+        }
+        document.getElementById('kamar').addEventListener('change', hitungTotal);
+        document.getElementById('checkin').addEventListener('change', hitungTotal);
+        document.getElementById('checkout').addEventListener('change', hitungTotal);
+    </script>
+>>>>>>> 37c5c731a773671ffbbd6fd34fb9f9c6b8e9c8cc
 
 @endsection
