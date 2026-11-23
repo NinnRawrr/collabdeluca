@@ -14,7 +14,7 @@
                         <label class="form-label">Tamu</label>
                         <select name="tamu_id" class="form-select" required>
                             <option value="">-- Pilih tamu --</option>
-                            @foreach ($tamu as $tamu)
+                            @foreach ($tamus as $tamu)
                                 <option value="{{ $tamu->id }}" {{ old('tamu_id') == $tamu->id ? 'selected' : '' }}>
                                     {{ $tamu->nama }}
                                 </option>
@@ -27,7 +27,7 @@
                         {{-- $kamars sudah difilter di controller: hanya kamar berstatus "tersedia" --}}
                         <select name="kamar_id" id="kamar" class="form-select" required>
                             <option value="">-- Pilih kamar --</option>
-                            @foreach ($kamar as $kamar)
+                            @foreach ($kamars as $kamar)
                                 <option value="{{ $kamar->id }}" data-harga="{{ $kamar->tipeKamar->harga_per_malam }}"
                                     {{ old('kamar_id') == $kamar->id ? 'selected' : '' }}>
                                     {{ $kamar->nomor_kamar }} - {{ $kamar->tipeKamar->nama_tipe }}
@@ -47,10 +47,11 @@
                         <input type="date" name="tanggal_checkout" id="checkout" class="form-control" value="{{ old('tanggal_checkout') }}" required>
                     </div>
 
-                    <div class="col-md-6">
-                        <label class="form-label">Total Bayar (dihitung otomatis)</label>
-                        <input type="text" id="total" class="form-control bg-light" value="Rp 0" readonly>
-                    </div>
+                   <div class="col-md-6">
+    <label class="form-label">Total Bayar (dihitung otomatis)</label>
+    <input type="text" id="total" class="form-control bg-light" value="Rp 0" readonly>
+    <input type="hidden" name="total_bayar" id="total_bayar_nilai" value="{{ old('total_bayar', 0) }}">
+</div>
                     <div class="col-md-6">
                         <label class="form-label">Status</label>
                         <select name="status" class="form-select">
@@ -70,19 +71,25 @@
     </div>
 
     {{-- Script kecil untuk menghitung total bayar = jumlah malam x harga kamar --}}
-    <script>
-        function hitungTotal() {
-            var kamar    = document.getElementById('kamar').selectedOptions[0];
-            var harga    = kamar ? kamar.dataset.harga : 0;
-            var checkin  = new Date(document.getElementById('checkin').value);
-            var checkout = new Date(document.getElementById('checkout').value);
-            var malam    = (checkout - checkin) / 86400000;
-            var total    = (harga && malam > 0) ? harga * malam : 0;
-            document.getElementById('total').value = 'Rp ' + total.toLocaleString('id-ID');
-        }
-        document.getElementById('kamar').addEventListener('change', hitungTotal);
-        document.getElementById('checkin').addEventListener('change', hitungTotal);
-        document.getElementById('checkout').addEventListener('change', hitungTotal);
-    </script>
+<script>
+    function hitungTotal() {
+        var kamar    = document.getElementById('kamar').selectedOptions[0];
+        var harga    = kamar ? Number(kamar.dataset.harga || 0) : 0;
+        var checkin  = new Date(document.getElementById('checkin').value);
+        var checkout = new Date(document.getElementById('checkout').value);
+        var malam    = (checkout - checkin) / 86400000;
+        var total    = (harga > 0 && malam > 0) ? Math.round(harga * malam) : 0;
+
+        document.getElementById('total').value = 'Rp ' + total.toLocaleString('id-ID');
+        document.getElementById('total_bayar_nilai').value = total;
+    }
+
+    document.getElementById('kamar').addEventListener('change', hitungTotal);
+    document.getElementById('checkin').addEventListener('change', hitungTotal);
+    document.getElementById('checkout').addEventListener('change', hitungTotal);
+
+    // Hitung otomatis saat halaman dibuka / setelah reload validasi
+    hitungTotal();
+</script>
 
 @endsection

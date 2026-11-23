@@ -25,12 +25,13 @@ class ReservasiController extends Controller
     // app/Http/Controllers/ReservasiController.php
     public function create()
     {
+        $tamus = Tamu::orderBy('nama')->get();
         $kamars = Kamar::with('tipeKamar')
             ->where('status', 'tersedia') // pastikan nama kolom & nilainya sama persis dengan di DB
             ->get();
 
         // ... kode lainnya (misalnya data tamu)
-        return view('reservasi.create', compact('kamars'));
+        return view('reservasi.create', compact('tamus', 'kamars'));
     }
 
     /**
