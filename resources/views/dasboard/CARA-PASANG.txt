@@ -1,0 +1,13 @@
+Dashboard Hotel (Laravel + Bootstrap 5)
+
+Salin ke proyek Laravel:
+  app/Http/Controllers/DashboardController.php
+  resources/views/dashboard.blade.php
+  resources/views/layouts/app.blade.php
+
+Tambahkan di routes/web.php:
+  use App\Http\Controllers\DashboardController;
+  Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+Catatan: navbar dan kartu memakai route tipe-kamar.index, kamar.index, tamu.index, reservasi.index.
+Buat dulu route-nya, atau hapus sementara menu/tautan yang belum ada.
