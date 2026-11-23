@@ -22,11 +22,15 @@ class ReservasiController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    // app/Http/Controllers/ReservasiController.php
     public function create()
     {
-        $kamar = Kamar::with('tipeKamar')->get();
-        $tamu = Tamu::all();
-        return view('reservasi.create', compact('kamar', 'tamu'));
+        $kamars = Kamar::with('tipeKamar')
+            ->where('status', 'tersedia') // pastikan nama kolom & nilainya sama persis dengan di DB
+            ->get();
+
+        // ... kode lainnya (misalnya data tamu)
+        return view('reservasi.create', compact('kamars'));
     }
 
     /**
@@ -46,7 +50,7 @@ class ReservasiController extends Controller
         Reservasi::create($request->all());
 
         return redirect()->route('reservasi.index')
-                         ->with('success', 'Reservasi berhasil dibuat.');
+            ->with('success', 'Reservasi berhasil dibuat.');
     }
 
     /**
@@ -87,7 +91,7 @@ class ReservasiController extends Controller
         $reservasi->update($request->all());
 
         return redirect()->route('reservasi.index')
-                         ->with('success', 'Reservasi berhasil diperbarui.');
+            ->with('success', 'Reservasi berhasil diperbarui.');
     }
 
     /**
@@ -99,6 +103,6 @@ class ReservasiController extends Controller
         $reservasi->delete();
 
         return redirect()->route('reservasi.index')
-                         ->with('success', 'Reservasi berhasil dihapus.');
+            ->with('success', 'Reservasi berhasil dihapus.');
     }
 }
