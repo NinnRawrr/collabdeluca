@@ -14,7 +14,7 @@
                         <label class="form-label">Tamu</label>
                         <select name="tamu_id" class="form-select" required>
                             <option value="">-- Pilih tamu --</option>
-                            @foreach ($tamus as $tamu)
+                            @foreach ($tamu as $tamu)
                                 <option value="{{ $tamu->id }}" {{ old('tamu_id') == $tamu->id ? 'selected' : '' }}>
                                     {{ $tamu->nama }}
                                 </option>
@@ -27,7 +27,7 @@
                         {{-- $kamars sudah difilter di controller: hanya kamar berstatus "tersedia" --}}
                         <select name="kamar_id" id="kamar" class="form-select" required>
                             <option value="">-- Pilih kamar --</option>
-                            @foreach ($kamars as $kamar)
+                            @foreach ($kamar as $kamar)
                                 <option value="{{ $kamar->id }}" data-harga="{{ $kamar->tipeKamar->harga_per_malam }}"
                                     {{ old('kamar_id') == $kamar->id ? 'selected' : '' }}>
                                     {{ $kamar->nomor_kamar }} - {{ $kamar->tipeKamar->nama_tipe }}

@@ -13,7 +13,7 @@
     {{-- MENU ATAS --}}
     <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('reservasi.index') }}">🏨 Hotel Kita</a>
+            <a class="navbar-brand" href="{{ route('dashboard') }}">🏨 Hotel Kita</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuUtama">
                 <span class="navbar-toggler-icon"></span>
             </button>
