@@ -4,6 +4,7 @@ use App\Http\Controllers\KamarController;
 use App\Http\Controllers\ReservasiController;
 use App\Http\Controllers\TamuController;
 use App\Http\Controllers\TipeKamarController;
+
 use Illuminate\Support\Facades\Route;
 
 // Tiap baris di bawah otomatis membuat alamat + nama route yang dipakai di view
